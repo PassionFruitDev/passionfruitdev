@@ -1,0 +1,13 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "PassionFruit CLI: Tooling for rapid deployment of hobbyist applications"
+repository = "https://github.com/rust-lang/cargo/"
+homepage = "https://github.com/PassionFruitDev/pf-cli"
+documentation = "https://github.com/PassionFruitDev/pf-cli/docs"
+readme = "README.md"
+
+[dependencies]
+clap = { version = "4.4.7", features = ["derive"] }
