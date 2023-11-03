@@ -48,15 +48,16 @@ pub fn execute(cli: Cli) {
         Command::New { name } => {
             println!("Creating project: {}", name)
         }
-        Command::Publish => publish(cli),
+        Command::Publish => publish(),
     }
 }
 
-pub fn publish(_cli: Cli) { 
+pub fn publish() { 
     let datetime = Utc::now();
     let datetime = format!("{}.{}.{}.{}.{}.{}",datetime.year(), datetime.month(), datetime.day(), datetime.hour(), datetime.minute(), datetime.second());
     let git_hash = RunCommand::new("git").args(&["rev-parse", "HEAD"]).output().unwrap();
     let git_hash = String::from_utf8(git_hash.stdout).unwrap();
+    let git_hash = git_hash.lines().next().unwrap();
     
     let dryrun = RunCommand::new("cargo").args(&["publish","--dry-run"]).output().unwrap();
     if dryrun.status.success() {
@@ -67,10 +68,13 @@ pub fn publish(_cli: Cli) {
         let cargo_toml = fs::read_to_string(&cargo_toml_path).unwrap();
         let mut cargo_toml = cargo_toml.parse::<Document>().unwrap();
         let version = cargo_toml["package"]["version"].as_str().unwrap();
-        let version = format!("{}-{}+{}",version,datetime,git_hash);
+        let version = format!("{}-{}",version,datetime);
+        let _ = RunCommand::new("git").args(&["tag", &version, &git_hash]).output().unwrap();
+        let _ = RunCommand::new("git").args(&["push","origin",&version]).output().unwrap();
+        let version = format!("{}+{}",&version,&git_hash);
         cargo_toml["package"]["version"] = value(&version);
         let _ = fs::write(&cargo_toml_path, cargo_toml.to_string()).unwrap();
-        let publish = RunCommand::new("cargo").args(&["publish","--allow-dirty"]).output().unwrap();
+        let _ = RunCommand::new("cargo").args(&["publish","--allow-dirty"]).output().unwrap();
         let _ = RunCommand::new("mv").args(&[&cargo_toml_backup_path, &cargo_toml_path]).output().unwrap();
     } else {
         println!("Publish failed dry run with error:\n{}",String::from_utf8_lossy(&dryrun.stderr));
