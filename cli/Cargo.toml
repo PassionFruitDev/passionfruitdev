@@ -1,6 +1,6 @@
 [package]
 name = "passionfruitdev-cli"
-version = "0.0.1-test"
+version = "0.1.2"
 authors = ["Jim Hill <jim.hill.r@gmail.com>"]
 edition = "2021"
 license = "MIT"
