@@ -43,6 +43,9 @@ enum OperatingSystem {
 
 #[derive(ValueEnum, Debug, Clone, PartialEq)]
 enum Lifecycle {
+    Manual,
+    Pull,
+    Merge,
     Nightly,
     Candidate,
     Official,
@@ -51,6 +54,9 @@ enum Lifecycle {
 impl fmt::Display for Lifecycle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            Lifecycle::Manual => write!(f, "manual"),
+            Lifecycle::Pull => write!(f, "pull"),
+            Lifecycle::Merge => write!(f, "merge"),
             Lifecycle::Nightly => write!(f, "nightly"),
             Lifecycle::Candidate => write!(f, "rc"),
             Lifecycle::Official => write!(f, "official"),
@@ -128,13 +134,13 @@ fn publish(lifecycle: &Lifecycle) {
                 .args(&["publish"])
                 .output()
                 .unwrap();
+            // TODO: Bump semver after official release.
         }
     } else {
         println!(
             "Publish failed dry run with error:\n{}",
             String::from_utf8_lossy(&dryrun.stderr)
         );
-        println!("Changed");
     }
     ()
 }
