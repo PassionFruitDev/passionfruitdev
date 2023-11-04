@@ -1,6 +1,6 @@
 [package]
 name = "passionfruitdev"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jim Hill <jim.hill.r@gmail.com>"]
 edition = "2021"
 license = "MIT"
