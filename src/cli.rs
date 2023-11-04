@@ -25,7 +25,7 @@ enum Command {
         name: String,
     },
     Publish {
-        #[arg(short, long, value_enum, default_value_t = Lifecycle::Nightly)]
+        #[arg(short, long, value_enum, default_value_t = Lifecycle::Manual)]
         lifecycle: Lifecycle,
     },
 }

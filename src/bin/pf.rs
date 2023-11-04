@@ -1,4 +1,4 @@
-use passionfruitdev_cli::cli::*;
+use passionfruitdev::cli::*;
 
 fn main() {
     let cli = Cli::parse();
