@@ -22,6 +22,8 @@ enum Command {
         os: OperatingSystem,
     },
     New {
+        #[arg(value_enum)]
+        solution: Solution,
         name: String,
     },
     Publish {
@@ -51,6 +53,11 @@ enum Lifecycle {
     Official,
 }
 
+#[derive(ValueEnum, Debug, Clone, PartialEq)]
+enum Solution {
+    Website
+}
+
 impl fmt::Display for Lifecycle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -71,8 +78,8 @@ pub fn execute(cli: Cli) {
                 println!("Installing Aarch64AppleDarwin on MacOS dependencies");
             }
         },
-        Command::New { name } => {
-            println!("Creating project: {}", name)
+        Command::New { name, solution } => {
+            println!("Creating {:?}: {:?} coming soon! For now, check out the templates folder in the repo.", solution, name)
         }
         Command::Publish { lifecycle } => publish(lifecycle),
     }

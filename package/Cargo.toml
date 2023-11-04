@@ -1,0 +1,22 @@
+[package]
+name = "passionfruitdev"
+version = "0.1.0"
+authors = ["Jim Hill <jim.hill.r@gmail.com>"]
+edition = "2021"
+license = "MIT"
+description = "A collection of app components for rapid app development."
+repository = "https://github.com/rust-lang/cargo/"
+homepage = "https://passionfruit.dev"
+documentation = "https://passionfruitdev.github.io"
+readme = "README.md"
+
+[dependencies]
+chrono = { version = "0.4.31", optional = true }
+clap = { version = "4.4.7", optional = true, features = ["derive"] }
+toml_edit = { version = "0.20.7", optional = true }
+leptos = { version = "0.5.2", optional = true, features = ["csr"] }
+
+[features]
+default = ["cli"]
+cli = ["dep:chrono","dep:clap","dep:toml_edit"]
+website = ["dep:leptos"]
