@@ -1,0 +1,24 @@
+name: Nightly
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '13 3 * * *'
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Lighthouse
+      id: lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        urls: 'https://website.template.passionfruit.dev'
+    - name: Verify Lighthouse Check results
+      uses: foo-software/lighthouse-check-status-action@master
+      with:
+        lighthouseCheckResults: ${{ steps.lighthouse.outputs.lighthouseCheckResults }}
+        minAccessibilityScore: "90"
+        minBestPracticesScore: "90"
+        minPerformanceScore: "90"
+        minProgressiveWebAppScore: "90"
+        minSeoScore: "90"
