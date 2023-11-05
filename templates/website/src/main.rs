@@ -8,6 +8,9 @@ fn main() {
 #[component]
 fn Body() -> impl IntoView {
     view! {
-        "Hello from passion fruit!"
+        <div class="my-0 mx-auto max-w-3xl text-center">
+            <h2 class="p-6 text-4xl">Thank you for trying Passion Fruit</h2>
+            <p class="px-10 pb-10 text-left">Change this area to personalize your website!</p>
+        </div>
     }
 }   
