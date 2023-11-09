@@ -5,8 +5,8 @@ authors = ["Jim Hill <jim.hill.r@gmail.com>"]
 edition = "2021"
 license = "MIT"
 description = "A collection of app components for rapid app development."
-repository = "https://github.com/rust-lang/cargo/"
-homepage = "https://passionfruit.dev"
+repository = "https://github.com/PassionFruitDev/passionfruitdev"
+homepage = "https://www.passionfruit.dev"
 documentation = "https://passionfruitdev.github.io"
 readme = "README.md"
 

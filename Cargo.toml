@@ -1,6 +1,7 @@
 [workspace]
 members = [
-    "package",
-    "templates/website"
+    "passionfruitdev",
+    "templates/website",
+    "codegen"
 ]
 resolver = "2"

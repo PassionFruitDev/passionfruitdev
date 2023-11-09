@@ -1,4 +1,4 @@
-use passionfruitdev::website::Website;
+use passionfruitdev::features::website::Website;
 use leptos::*;
 
 fn main() {
